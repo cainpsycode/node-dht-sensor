@@ -186,8 +186,8 @@ long readDHT(int type, int pin, float &temperature, float &humidity)
       h /= 10.0;
 
       f = (data[2] & 0x7F) * 256 + data[3];
+      if (data[2] & 0x80) f -= 0x7FFF;
       f /= 10.0;
-      if (data[2] & 0x80) f *= -1;
 
       #ifdef VERBOSE
       fprintf(pTrace, "temperature = %.1f, humidity = %.1f\n", f, h);
